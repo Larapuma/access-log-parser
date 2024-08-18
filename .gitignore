@@ -11,7 +11,7 @@ target/
 *.iws
 *.iml
 *.ipr
-untitled2/src/test
+test
 ### Eclipse ###
 .apt_generated
 .classpath
