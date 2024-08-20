@@ -31,8 +31,10 @@ public class Main {
 
                 int YandexCounter = 0;
                 int GoogleCounter = 0;
+                int lines = 0;
 
                 while ((line = reader.readLine())!= null){
+                    lines+=1;
                     throwMyCustomException(line);
                     String[] parts = line.split(";");
                     if (parts.length >= 2) {
@@ -56,6 +58,7 @@ public class Main {
                     }
                 }
                 System.out.println("GoogleCounter: " +GoogleCounter +" , YandexCounter "+ YandexCounter );
+                System.out.println((double) GoogleCounter/(double) lines + "     "+ (double) YandexCounter/(double) lines);
 
 
 
