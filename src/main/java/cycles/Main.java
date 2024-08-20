@@ -1,6 +1,9 @@
 package cycles;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -25,18 +28,35 @@ public class Main {
                 FileReader fileReader = new FileReader(path);
                 BufferedReader reader = new BufferedReader(fileReader);
                 String line;
-                int maxlen = 0;
-                int minlen = Integer.MAX_VALUE;
-                int lineCounter = 0;
+
+                int YandexCounter = 0;
+                int GoogleCounter = 0;
+
                 while ((line = reader.readLine())!= null){
                     throwMyCustomException(line);
-                    maxlen = Integer.max(maxlen,line.length());
-                    minlen = Integer.min(minlen,maxlen);
-                    lineCounter+=1;
+                    String[] parts = line.split(";");
+                    if (parts.length >= 2) {
+                        parts[0] = parts[0].replaceAll("\\s+","");
+                        parts[1] = parts[1].replaceAll("\\s+","");
 
+                        if(parts[1].indexOf("/")>0) {
+
+                            if(parts[1].substring(0, parts[1].indexOf("/")).equals("Googlebot")){
+                                GoogleCounter+=1;
+                                System.out.println(parts[1].substring(0, parts[1].indexOf("/")));
+                                continue;
+                            }
+                            if(parts[1].substring(0, parts[1].indexOf("/")).equals("YandexBot")){
+                                YandexCounter+=1;
+                                continue;
+
+                            }
+
+                        }
+                    }
                 }
-                System.out.println("Файл номер " + counter + ". Самая длинная строка длиной " + maxlen + " символов, "+ "Самая короткая " +
-                        "строка "+ minlen +". "+ "Всего " + lineCounter + " строк.");
+                System.out.println("GoogleCounter: " +GoogleCounter +" , YandexCounter "+ YandexCounter );
+
 
 
             }catch (FileNotFoundException fileNotFoundException){
@@ -57,3 +77,6 @@ public class Main {
     }
 }
 
+/*C:\Users\'user\Downloads\access.log
+
+ */
