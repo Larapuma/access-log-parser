@@ -34,9 +34,11 @@ public class Main {
                 int lines = 0;
 
                 while ((line = reader.readLine())!= null){
+                    LogEntry logEntry = new LogEntry(line);
                     lines+=1;
                     throwMyCustomException(line);
                     String[] parts = line.split(";");
+
                     if (parts.length >= 2) {
                         parts[0] = parts[0].replaceAll("\\s+","");
                         parts[1] = parts[1].replaceAll("\\s+","");
@@ -45,7 +47,6 @@ public class Main {
 
                             if(parts[1].substring(0, parts[1].indexOf("/")).equals("Googlebot")){
                                 GoogleCounter+=1;
-                                System.out.println(parts[1].substring(0, parts[1].indexOf("/")));
                                 continue;
                             }
                             if(parts[1].substring(0, parts[1].indexOf("/")).equals("YandexBot")){
@@ -55,6 +56,7 @@ public class Main {
                             }
 
                         }
+                        System.out.println(logEntry);
                     }
                 }
                 System.out.println("GoogleCounter: " +GoogleCounter +" , YandexCounter "+ YandexCounter );
