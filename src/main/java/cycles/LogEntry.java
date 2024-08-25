@@ -12,7 +12,7 @@ public class LogEntry {
     private final int code;
     private final int dataSize;
     private final String referer;
-    private final String userAgent;
+    private final UserAgent userAgent;
 
     public LogEntry(String str) {
         this.ipAdress = str.substring(0, str.indexOf(" "));
@@ -47,10 +47,12 @@ public class LogEntry {
         this.referer = str.substring(0,str.indexOf("\""));
         str =  str.substring(str.indexOf(" ")+2);
         int index = str.indexOf("/");
+
+
         if(index!=-1){
-            this.userAgent =  str.substring(0,str.indexOf("/"));
+            this.userAgent = new UserAgent(str.substring(str.indexOf("(")+1));
         }else{
-            this.userAgent = str.substring(0,str.length()-1);
+            this.userAgent = new UserAgent(str.substring(0,str.length()-1));
         }
 
 
@@ -86,7 +88,7 @@ public class LogEntry {
         return referer;
     }
 
-    public String getUserAgent() {
+    public UserAgent getUserAgent() {
         return userAgent;
     }
 
